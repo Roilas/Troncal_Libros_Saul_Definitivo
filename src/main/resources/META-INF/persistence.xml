@@ -8,6 +8,7 @@
 	
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 <!-- 		<class>com.journaldev.jpa.data.Employee</class> -->
+<!-- 		<class>com.journaldev.jpa.data2.Employee</class> -->
 		
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/TestDB" />

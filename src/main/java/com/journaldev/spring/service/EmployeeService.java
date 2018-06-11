@@ -1,5 +1,7 @@
 package com.journaldev.spring.service;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -60,6 +62,20 @@ public class EmployeeService {
 //			transactionManager.rollback(status);
 //		}
 //		transactionManager.commit(status);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Employee> listar() {
+		
+		return em.createQuery("from Employee e").getResultList();
+		
+	}
+
+	@Transactional
+	public void eliminar(Employee emp) {
+		
+		Employee e = em.find(Employee.class, emp.getEmployeeId());
+		em.remove(e);
 	}
 
 }

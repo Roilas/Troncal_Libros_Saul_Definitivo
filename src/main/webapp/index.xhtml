@@ -4,7 +4,7 @@
 		xmlns:f="http://java.sun.com/jsf/core"
 		xmlns:p="http://primefaces.org/ui">
 	<h:head>
-		<script name="jquery/jquery.js" library="primefaces"></script>
+		<h:outputScript library="js" name="calendar_es.js" />
 		<title>Register Employee</title>
 	</h:head>
 	<h:form>
@@ -15,7 +15,7 @@
 			<p:inputText value="#{registerEmployee.employee.employeeName}"></p:inputText>
 			
 			<p:outputLabel value="Enter Employee Hire Date:"></p:outputLabel>
-			<p:calendar pattern="MM/dd/yyyy HH:mm:ss" value="#{registerEmployee.employee.employeeHireDate}"></p:calendar>
+			<p:calendar locale="es" pattern="MM/dd/yyyy HH:mm:ss" value="#{registerEmployee.employee.employeeHireDate}"></p:calendar>
 			
 			<p:outputLabel value="Enter Employee Salary:"></p:outputLabel>
 			<p:inputText value="#{registerEmployee.employee.employeeSalary}"></p:inputText>		
@@ -23,4 +23,51 @@
 		</p:panelGrid>
 		<p:commandButton value="Register" action="#{registerEmployee.register}" update="messages"></p:commandButton>
 	</h:form>
-	</html>
+
+
+
+	<h:form rendered="#{registerEmployee.verificarSesion()}">
+	
+		<h:commandButton actionListener="#{registerEmployee.listar()}"
+			value="Listar" />
+	
+		<p:dataTable value="#{registerEmployee.lstEmpleados}" var="emp">
+
+			<p:column headerText="Id">
+				<h:outputLabel value="#{emp.employeeId}" />
+			</p:column>
+			
+			<p:column headerText="Nombre">
+				<h:outputLabel value="#{emp.employeeName}" />
+			</p:column>		
+				
+			<p:column headerText="Fecha Alta">
+				<h:outputLabel value="#{emp.employeeHireDate}" >
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="#{registerEmployee.timeZone}" />
+				</h:outputLabel>
+			</p:column>
+				
+			<p:column headerText="Salario">
+				<h:outputLabel value="#{emp.employeeSalary}" />
+			</p:column>							
+			
+			<p:column headerText="Eliminar">
+				<h:commandLink actionListener="#{registerEmployee.eliminar(emp)}"
+					value="Eliminar" />
+			</p:column>
+			
+			<p:column headerText="Modificar">
+				<h:commandLink action="#{registerEmployee.leer(emp)}" value="Modificar" />
+			</p:column>
+
+		</p:dataTable>
+	
+		<h:commandButton value="Cerrar Sesión"
+			action="#{registerEmployee.cerrarSesion()}" />
+	</h:form>
+
+
+
+
+
+</html>

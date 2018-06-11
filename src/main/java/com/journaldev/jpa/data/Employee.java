@@ -10,6 +10,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class Employee {
+	
 	@Id
 	@Column(name="EMP_ID")
 	private long employeeId;

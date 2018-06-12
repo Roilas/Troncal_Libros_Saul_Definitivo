@@ -20,6 +20,7 @@ public class RegisterEmployee {
 	private List<Employee> lstEmpleados;
 	
 	public List<Employee> getLstEmpleados() {
+		listar();
 		return lstEmpleados;
 	}
 
@@ -49,11 +50,11 @@ public class RegisterEmployee {
 	}
 
 	public String register() {
-		// Calling Business Service
 		employeeService.register(employee);
-		// Add message
+		listar();
 		FacesContext.getCurrentInstance().addMessage(null, 
-				new FacesMessage("The Employee "+this.employee.getEmployeeName()+" Is Registered Successfully"));
+				new FacesMessage("El empleado "+this.employee.getEmployeeName()+" se ha registrado con éxito"));
+		employee = new Employee();
 		return "";
 	}
 	
@@ -72,6 +73,7 @@ public class RegisterEmployee {
 	}
 	
 	public String leer (Employee emp) {
+		this.employee = emp;
 		return "editar";
 	}
 	
@@ -84,4 +86,14 @@ public class RegisterEmployee {
 		  TimeZone timeZone = TimeZone.getDefault();  
 		  return timeZone;  
 	}  
+	
+	public String modificar() {
+		employeeService.modificar(employee);
+		listar();
+		employee = new Employee();
+		return "index?faces-redirect=true";
+	}
+	public String cancelar() {
+		return "index?faces-redirect=true";
+	}
 }

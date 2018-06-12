@@ -7,29 +7,29 @@
 		<h:outputScript library="js" name="calendar_es.js" />
 		<title>Register Employee</title>
 	</h:head>
-	<h:form>
+	<h:form id="formu1">
 		<p:growl id="messages"></p:growl>
 		<p:panelGrid columns="2">
 		
-			<p:outputLabel value="Enter Employee Name:"></p:outputLabel>
-			<p:inputText value="#{registerEmployee.employee.employeeName}"></p:inputText>
+			<p:outputLabel value="Nombre:"></p:outputLabel>
+			<p:inputText label="Nombre" value="#{registerEmployee.employee.employeeName}" required="true" ></p:inputText>
 			
-			<p:outputLabel value="Enter Employee Hire Date:"></p:outputLabel>
-			<p:calendar locale="es" pattern="MM/dd/yyyy HH:mm:ss" value="#{registerEmployee.employee.employeeHireDate}"></p:calendar>
+			<p:outputLabel value="Fecha Alta:"></p:outputLabel>
+			<p:calendar label="Fecha Alta" locale="es" pattern="dd/MM/yyyy HH:mm:ss" value="#{registerEmployee.employee.employeeHireDate}" required="true"></p:calendar>
 			
-			<p:outputLabel value="Enter Employee Salary:"></p:outputLabel>
-			<p:inputText value="#{registerEmployee.employee.employeeSalary}"></p:inputText>		
+			<p:outputLabel value="Salario:"></p:outputLabel>
+			<p:inputText label="Salario" value="#{registerEmployee.employee.employeeSalary}" required="true"></p:inputText>		
 							
 		</p:panelGrid>
-		<p:commandButton value="Register" action="#{registerEmployee.register}" update="messages"></p:commandButton>
+		<p:commandButton value="Registrar" action="#{registerEmployee.register}" update="messages,:formu2,formu1"></p:commandButton>
 	</h:form>
 
 
 
-	<h:form rendered="#{registerEmployee.verificarSesion()}">
+	<h:form id="formu2" rendered="#{registerEmployee.verificarSesion()}">
 	
-		<h:commandButton actionListener="#{registerEmployee.listar()}"
-			value="Listar" />
+<!-- 		<p:commandButton actionListener="#{registerEmployee.listar()}" -->
+<!-- 			value="Listar" ajax="false" /> -->
 	
 		<p:dataTable value="#{registerEmployee.lstEmpleados}" var="emp">
 
@@ -43,7 +43,7 @@
 				
 			<p:column headerText="Fecha Alta">
 				<h:outputLabel value="#{emp.employeeHireDate}" >
-					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="#{registerEmployee.timeZone}" />
+					<f:convertDateTime pattern="dd/MM/yyyy HH:mm " timeZone="#{registerEmployee.timeZone}" />
 				</h:outputLabel>
 			</p:column>
 				

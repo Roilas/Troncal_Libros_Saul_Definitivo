@@ -78,4 +78,9 @@ public class EmployeeService {
 		em.remove(e);
 	}
 
+	@Transactional
+	public void modificar(Employee employee) {
+		em.merge(employee);
+	}
+
 }

@@ -50,11 +50,17 @@ public class RegisterEmployee {
 	}
 
 	public String register() {
-		employeeService.register(employee);
-		listar();
-		FacesContext.getCurrentInstance().addMessage(null, 
-				new FacesMessage("El empleado "+this.employee.getEmployeeName()+" se ha registrado con éxito"));
-		employee = new Employee();
+		try {
+			employeeService.register(employee);
+			listar();
+			FacesContext.getCurrentInstance().addMessage(null, 
+					new FacesMessage("El empleado "+this.employee.getEmployeeName()+" se ha registrado con éxito"));
+			employee = new Employee();
+			
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, 
+					new FacesMessage("Error al registrar"));
+		}
 		return "";
 	}
 	
@@ -68,8 +74,13 @@ public class RegisterEmployee {
 	}
 	
 	public void eliminar( Employee emp) {
-		employeeService.eliminar(emp);
-		listar();
+		try {
+			employeeService.eliminar(emp);
+			listar();
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, 
+					new FacesMessage("Error al eliminar"));
+		}
 	}
 	
 	public String leer (Employee emp) {
@@ -88,12 +99,21 @@ public class RegisterEmployee {
 	}  
 	
 	public String modificar() {
-		employeeService.modificar(employee);
-		listar();
-		employee = new Employee();
-		return "index?faces-redirect=true";
+		try {
+			employeeService.modificar(employee);
+			listar();
+			employee = new Employee();
+			return "index?faces-redirect=true";
+			
+		} catch (Exception e) {
+			employee = new Employee();
+			FacesContext.getCurrentInstance().addMessage(null, 
+					new FacesMessage("Error al modificar"));
+			return "index";
+		}
 	}
 	public String cancelar() {
+		employee = new Employee();
 		return "index?faces-redirect=true";
 	}
 }

@@ -35,9 +35,13 @@ public class EmployeeService {
     private PlatformTransactionManager transactionManager;
 	
 	@Transactional
-	public void register(Employee emp) {
-		// Save employee
-		this.em.persist(emp);
+	public void register(Employee emp) throws Exception {
+		try {
+			this.em.persist(emp);
+//			this.em.persist(null);
+		} catch (Exception e) {
+			throw new Exception("Error al registrar");
+		}
 		
 		
 //		//Forma 1: Crear una transaccion propia
@@ -72,15 +76,25 @@ public class EmployeeService {
 	}
 
 	@Transactional
-	public void eliminar(Employee emp) {
+	public void eliminar(Employee emp) throws Exception {
 		
-		Employee e = em.find(Employee.class, emp.getEmployeeId());
-		em.remove(e);
+		try {
+			Employee e = em.find(Employee.class, emp.getEmployeeId());
+			em.remove(e);
+//			em.remove(null);
+		} catch (Exception e) {
+			throw new Exception("Error al eliminar");
+		}
 	}
 
 	@Transactional
-	public void modificar(Employee employee) {
-		em.merge(employee);
+	public void modificar(Employee employee) throws Exception {
+		try {
+//			em.merge(employee);
+			em.merge(null);
+		} catch (Exception e) {
+			throw new Exception("Error al modificar");
+		}
 	}
 
 }

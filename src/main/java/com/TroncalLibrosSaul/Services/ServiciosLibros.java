@@ -3,6 +3,8 @@ package com.TroncalLibrosSaul.Services;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
@@ -17,8 +19,6 @@ import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import com.TroncalLibrosSaul.ClasesBasicas.Libro;
-import com.enlawebdekaaf.jpa.entity.EntityManagerFactory;
-import com.enlawebdekaaf.jpa.entity.EntityTransaction;
 import com.journaldev.jpa.data.Employee;
 
 @Component
@@ -59,7 +59,7 @@ public class ServiciosLibros {
 	
 	@Transactional
 	public void register(Libro emp){
-		EntityManagerFactory emf=Persistence.createEntityManagerFactory("ejemplojpa");;
+		EntityManagerFactory emf=Persistence.createEntityManagerFactory("ejemplojpa");
 		EntityManager em=emf.createEntityManager();
 		EntityTransaction et=em.getTransaction();
 		try {

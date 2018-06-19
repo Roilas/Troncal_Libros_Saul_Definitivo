@@ -31,8 +31,8 @@ public class EmployeeService {
 		this.em = em;
 	}
 
-	@Autowired
-    private PlatformTransactionManager transactionManager;
+//	@Autowired
+//    private PlatformTransactionManager transactionManager;
 	
 	@Transactional
 	public void register(Employee emp) throws Exception {

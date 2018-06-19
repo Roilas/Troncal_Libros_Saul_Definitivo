@@ -28,7 +28,7 @@ public class RegisterEmployee {
 		this.lstEmpleados = lstEmpleados;
 	}
 
-	@ManagedProperty("#{employeeService}")
+	@ManagedProperty("#{employeeService2}")
 	private EmployeeService employeeService;
 
 	private Employee employee = new Employee();

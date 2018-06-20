@@ -19,7 +19,6 @@ import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import com.TroncalLibrosSaul.ClasesBasicas.Libro;
-import com.journaldev.jpa.data.Employee;
 
 @Component
 public class ServiciosLibros {

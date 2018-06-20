@@ -1,0 +1,50 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<script name="jquery/jquery.js" library="primefaces"></script>
+	<title>Registrar</title>
+	<link rel="stylesheet" type="text/css" href="css/estilos.css"></link>
+</h:head>
+<body>
+
+<h1 id="titulo">Registrar</h1>
+	<div id="cuadro">
+	<h:form id="formu">
+		<p:growl id="messages"></p:growl>
+		<div id="pan" class="margin">
+		<p:panelGrid columns="2">
+
+			<p:outputLabel value="Usuario:"></p:outputLabel>
+			<p:inputText value="#{usuarioBean.usuario.nombre}"></p:inputText>
+			
+			<p:outputLabel value="Contraseña:"></p:outputLabel>
+			<p:inputText type="password" value="#{usuarioBean.usuario.password}"></p:inputText>
+			
+			
+
+		</p:panelGrid>
+		</div>
+		<p:commandButton value="Registrar" action="#{usuarioBean.registrar}"
+			update="messages, formu"></p:commandButton>
+		<p:commandButton value="Cancelar" action="#{libroBean.cerrarS}"
+			update="messages, formu"></p:commandButton>
+	</h:form>
+	</div>
+
+<h:form>
+<p:stack icon="https://www.primefaces.org/showcase/resources/demo/images/dock/stack.png" expanded="true">
+    <p:menuitem action="#{libroBean.cerrarS}" value="LogOut" icon="https://ugc.kn3.net/i/origin/http://fc02.deviantart.com/fs16/i/2007/211/9/9/ShutDown_Button_by_helmetk.png"/>
+    <p:menuitem action="#{libroBean.home}" value="Inicio" icon="https://www.primefaces.org/showcase/resources/demo/images/dock/home.png"/>
+</p:stack>
+</h:form>
+
+
+
+
+</body>
+
+</html>

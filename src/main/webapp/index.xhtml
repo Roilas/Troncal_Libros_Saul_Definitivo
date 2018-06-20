@@ -1,32 +1,154 @@
-	<html xmlns="http://www.w3.org/1999/xhtml"
-		xmlns:ui="http://java.sun.com/jsf/facelets"
-		xmlns:h="http://java.sun.com/jsf/html"
-		xmlns:f="http://java.sun.com/jsf/core"
-		xmlns:p="http://primefaces.org/ui">
-	<h:head>
-		<h:outputScript library="js" name="calendar_es.js" />
-		<title>Register Employee</title>
-	</h:head>
-     <h:body>
- 
- 
- <h:form>
-	
-		<p:growl id="messages"></p:growl>
-		<p:panelGrid columns="2">
-		
-			<p:outputLabel value="Introduce el titulo del libro:"></p:outputLabel>
-			<p:inputText value="#{gestorLibros.libro.titulo}"></p:inputText>
-			
-			<p:outputLabel value="Introduce la fecha de publicacion:"></p:outputLabel>
-			<p:calendar pattern="dd/MM/yyyy HH:mm:ss" value="#{gestorLibros.libro.fecha}"></p:calendar>
-			
-			<p:outputLabel value="Introduce el autor:"></p:outputLabel>
-			<p:inputText value="#{gestorLibros.libro.autor}"></p:inputText>		
-							
-		</p:panelGrid>
-		<p:commandButton value="Register" action="#{gestorLibros.Registrar}" update="messages"></p:commandButton>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<script name="jquery/jquery.js" library="primefaces"></script>
+	<title>Registrar Libros</title>
+	<link rel="stylesheet" type="text/css" href="css/estilos.css"></link>
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+		integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+		crossorigin="anonymous"></link>
+</h:head>
+<body>
+
+	<h1 id="titulo">Tabla de libros</h1>
+
+	<div id="profile"
+		style="text-align: right; position: fixed; top: 1em; right: 1em; color: white; font-size: 1.2em;">
+		<h:outputLabel value="#{usuarioBean.usuario.nombre}"></h:outputLabel>
+		<i class="fas fa-user-circle"></i>
+	</div>
+
+	<div id="cuadro">
+		<h:form id="formu">
+			<p:growl id="messages"></p:growl>
+			<div id="pan2" class="margin">
+				<p:panelGrid columns="2">
+
+					<p:outputLabel value="Introduce el ISBN:"></p:outputLabel>
+					<p:inputText value="#{libroBean.libro.codigolibro}"></p:inputText>
+
+					<p:outputLabel value="Introduce el título:"></p:outputLabel>
+					<p:inputText value="#{libroBean.libro.titulo}"></p:inputText>
+
+					<p:outputLabel value="Introduce el autor:"></p:outputLabel>
+					<p:inputText value="#{libroBean.libro.autor}"></p:inputText>
+
+					<p:outputLabel value="Introduce el año:"></p:outputLabel>
+					<p:inputText value="#{libroBean.libro.anio}"></p:inputText>
+					
+					<p:outputLabel value="Introduce una descripción(opcional):"></p:outputLabel>
+					<p:inputText value="#{libroBean.libro.descripcion}"></p:inputText>
+					
+					<p:outputLabel value="Introduce una url de la carátula(opcional):"></p:outputLabel>
+					<p:inputText value="#{libroBean.libro.imagen}"></p:inputText>
+
+
+				</p:panelGrid>
+			</div>
+			<p:commandButton value="Register" action="#{libroBean.register}"
+				update="messages, formu, :formu2"></p:commandButton>
+		</h:form>
+
+
+		<!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
+
+
+		<h:form id="formu2" rendered="#{libroBean.verificarSesion()}">
+
+			<p:commandButton actionListener="#{libroBean.listar()}"
+				value="Listar" ajax="false" />
+
+			<div class="margin">
+				<p:dataTable emptyMessage="No se han encontrado libros"
+					scrollHeight="350" scrollable="true" value="#{libroBean.lstLibros}"
+					var="emp">
+
+					<p:column style="width:16px">
+						<p:rowToggler />
+					</p:column>
+
+					<p:column filterBy="#{emp.codigolibro}" headerText="ISBN"
+						sortBy="#{emp.codigolibro}">
+						<p:outputLabel value="#{emp.codigolibro}" />
+					</p:column>
+					<p:column filterBy="#{emp.titulo}" headerText="Título"
+						sortBy="#{emp.titulo}">
+						<!-- 				<f:facet name="header"> -->
+						<!-- 					<p:outputLabel value="Título" /> -->
+						<!-- 				</f:facet> -->
+						<p:outputLabel value="#{emp.titulo}" />
+					</p:column>
+					<p:column filterBy="#{emp.autor}" headerText="Autor"
+						sortBy="#{emp.autor}">
+						<!-- 				<f:facet name="header"> -->
+						<!-- 					<p:outputLabel value="Autor" /> -->
+						<!-- 				</f:facet> -->
+						<p:outputLabel value="#{emp.autor}" />
+					</p:column>
+					<p:column filterBy="#{emp.anio}" headerText="Año"
+						sortBy="#{emp.anio}">
+						<!-- 				<f:facet name="header"> -->
+						<!-- 					<h:outputLabel value="Año" /> -->
+						<!-- 				</f:facet> -->
+						<p:outputLabel value="#{emp.anio}" />
+					</p:column>
+					<p:column class="cursorDefault" headerText="Eliminar">
+						<!-- 				<f:facet name="header"> -->
+						<!-- 					<p:outputLabel value="Eliminar" /> -->
+						<!-- 				</f:facet> -->
+						<p:commandLink actionListener="#{libroBean.eliminar(emp)}"
+							value="Eliminar" ajax="false" />
+					</p:column>
+					<p:column class="cursorDefault" headerText="Modificar">
+						<!-- 				<f:facet name="header"> -->
+						<!-- 					<p:outputLabel value="Modificar" /> -->
+						<!-- 				</f:facet> -->
+						<p:commandLink action="#{libroBean.leer(emp)}" value="Modificar"
+							ajax="false" />
+					</p:column>
+					<p:rowExpansion>
+						<p:panelGrid columns="2" columnClasses="label,value"
+							style="width:100%">
+							<f:facet name="header">
+								<p:graphicImage width="250px" height="250px" url="#{emp.imagen}" />
+							</f:facet>
+
+							<h:outputText value="Descripción:" />
+							<h:outputText value="#{emp.descripcion}" />
+
+						</p:panelGrid>
+					</p:rowExpansion>
+				</p:dataTable>
+			</div>
+
+
+
+
+			<!-- 		<p:commandButton value="Cerrar Sesión" -->
+			<!-- 			action="#{libroBean.cerrarSesion()}" ajax="false" /> -->
+		</h:form>
+
+	</div>
+
+	<h:form>
+		<p:stack
+			icon="https://www.primefaces.org/showcase/resources/demo/images/dock/stack.png"
+			expanded="true">
+			<p:menuitem action="#{libroBean.cerrarS}" value="LogOut"
+				icon="https://ugc.kn3.net/i/origin/http://fc02.deviantart.com/fs16/i/2007/211/9/9/ShutDown_Button_by_helmetk.png" />
+			<p:menuitem action="#{libroBean.home}" value="Inicio"
+				icon="https://www.primefaces.org/showcase/resources/demo/images/dock/home.png" />
+		</p:stack>
 	</h:form>
- 
-     </h:body>
+
+
+
+
+</body>
+
 </html>

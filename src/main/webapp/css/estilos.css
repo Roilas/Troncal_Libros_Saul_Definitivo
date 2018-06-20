@@ -21,8 +21,8 @@ h1{
 	padding: 2em;
 	background-color: rgba(0,0,0,.6);
 	position: absolute;
-	left: 22vw;
-	width: 50vw;
+	left: 15vw;
+	width: 68vw;
 }
 
 #pan{
@@ -50,6 +50,11 @@ h1{
 }
 .value{
 	width: 75%;
+}
+.Texto-Blanco{
+	color: white;
+	 font-size: 20px;
+	 text-align: center;
 }
 
 

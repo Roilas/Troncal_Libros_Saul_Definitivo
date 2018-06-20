@@ -1,0 +1,107 @@
+
+NOMBRE DE LA TABLA ----->  saul_trabajo_troncal
+
+
+
+
+
+-- phpMyAdmin SQL Dump
+-- version 4.7.9
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: localhost:3306
+-- Tiempo de generación: 20-06-2018 a las 16:40:39
+-- Versión del servidor: 5.7.21
+-- Versión de PHP: 7.1.16
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `saul_trabajo_troncal`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `libros`
+--
+
+CREATE TABLE `libros` (
+  `codigolibro` varchar(20) NOT NULL,
+  `titulo` varchar(45) NOT NULL,
+  `autor` varchar(45) NOT NULL,
+  `anio` int(11) NOT NULL,
+  `nombreusuario` varchar(20) NOT NULL,
+  `descripcion` text,
+  `imagen` longtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `libros`
+--
+
+INSERT INTO `libros` (`codigolibro`, `titulo`, `autor`, `anio`, `nombreusuario`, `descripcion`, `imagen`) VALUES
+('1', 'El Señor de los anillos', 'J.R.R Tolkien', 0, 'Saul', '', NULL),
+('2', 'El Hobbit', 'J.R.R Tolkien', 1937, 'Saul', '', NULL),
+('3', 'Harry Potter y la piedra filosofal', 'J.K  Rowling', 0, 'Saul', '', NULL),
+('5', 'El código Da Vinci', 'Dan Brown', 2003, 'Admin', '', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `nombre` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`nombre`, `password`) VALUES
+('Admin', '1234'),
+('Saul', 'Arriaga');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `libros`
+--
+ALTER TABLE `libros`
+  ADD PRIMARY KEY (`codigolibro`),
+  ADD KEY `FK_USUARIO` (`nombreusuario`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`nombre`);
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `libros`
+--
+ALTER TABLE `libros`
+  ADD CONSTRAINT `FK_USUARIO` FOREIGN KEY (`nombreusuario`) REFERENCES `usuarios` (`nombre`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

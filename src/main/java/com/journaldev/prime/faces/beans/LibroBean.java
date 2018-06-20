@@ -60,10 +60,13 @@ public class LibroBean implements Serializable{
 	}
 
 	public String register() {
+		System.out.println("------------------------------------------------");
+		System.out.println("LIBRO BEAN: Iniciando metodo ---> register");
 		// Calling Business Service
 		libroDao.register(libro);
 		String tit = libro.getTitulo();
 		libro = new Libros();
+		System.out.println("LIBRO BEAN: Libro " + libro.getTitulo() + " Insertado correctamente");
 		listar();
 		// Add message
 		FacesContext.getCurrentInstance().addMessage(null, 
@@ -78,12 +81,19 @@ public class LibroBean implements Serializable{
 	
 	
 	public void eliminar(Libros libro) {
+		System.out.println("------------------------------------------------");
+		System.out.println("LIBRO BEAN: Iniciando metodo ---> eliminar");
 		
 		libroDao.eliminar(libro);
+		
+		System.out.println("LIBRO BEAN: Metodo finalizado");
 		listar();
 	}
 	
 	public String leer(Libros libro) {
+		
+		System.out.println("------------------------------------------------");
+		System.out.println("LIBRO BEAN: Iniciando metodo ---> leer");
 		this.libro = libro;
 		return "modify";
 	}
@@ -96,7 +106,11 @@ public class LibroBean implements Serializable{
 	}
 	
 	public String modificar() {
+		System.out.println("------------------------------------------------");
+		System.out.println("LIBRO BEAN: Iniciando metodo ---> modificar");
+		System.out.println("Se modificara el libro: " + libro.getTitulo());
 		libroDao.modificar(libro);
+		System.out.println("LIBRO BEAN: Metodo finalizado");
 		return "index";
 	}
 	

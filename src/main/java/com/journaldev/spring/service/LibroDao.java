@@ -39,19 +39,23 @@ public class LibroDao {
 
 	@Transactional
 	public void register(Libros emp) {
-		// Save employee
-		
+
+		System.out.println("------------------------------------------------");
+		System.out.println("LIBRO DAO: Iniciando metodo ---> register");
 		Usuarios u = new Usuarios();
 		Usuarios usuLogeado = (Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"); 
 		u = em.find(Usuarios.class, usuLogeado.getNombre());
 		emp.setUsuario(u);
 		this.em.persist(emp);
+		System.out.println("LIBRO DAO: Metodo finalizado");
 
 
 	}
 
 	public List<Libros> listar() {
 
+		System.out.println("------------------------------------------------");
+		System.out.println("LIBRO DAO: Iniciando metodo ---> listar");
 		Usuarios usuLogeado = (Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario"); 
 		
 		List<Libros> lst = em.createNativeQuery("SELECT * FROM Libros WHERE nombreusuario='" + usuLogeado.getNombre() + "'", Libros.class).getResultList();
@@ -61,6 +65,9 @@ public class LibroDao {
 
 	@Transactional
 	public void eliminar(Libros libro) {
+		
+		System.out.println("------------------------------------------------");
+		System.out.println("LIBRO DAO: Iniciando metodo ---> eliminar");
 
 		if (!em.contains(libro)) {
 			libro = em.merge(libro);

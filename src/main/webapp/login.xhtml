@@ -33,12 +33,15 @@
 		</p:panelGrid>
 		<br></br>
 		<div class="re">
-			<span>¿No tienes usuario?</span><p:commandLink value="Resgistrar" action="#{usuarioBean.irRegistrar()}" ajax="false" />
+			<span class="Texto-Blanco">¿No tienes usuario?</span><p:commandLink value="Resgistrar" action="#{usuarioBean.irRegistrar()}" ajax="false" />
 			</div>
 		</div>
 		<p:commandButton value="Iniciar Sesión" action="#{usuarioBean.iniciarSesion}"
 			update="messages, formu"></p:commandButton>
 	</h:form>
+	
+		<div class="Texto-Blanco">Usuario1: "Saul" Contraseña: "Arriaga"</div>
+		<div class="Texto-Blanco">Usuario1: "Admin" Contraseña: "1234"</div>
 	</div>
 
 

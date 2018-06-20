@@ -44,8 +44,7 @@
 					<p:outputLabel value="Introduce una descripción(opcional):"></p:outputLabel>
 					<p:inputText value="#{libroBean.libro.descripcion}"></p:inputText>
 					
-					<p:outputLabel value="Introduce una url de la carátula(opcional):"></p:outputLabel>
-					<p:inputText value="#{libroBean.libro.imagen}"></p:inputText>
+
 
 
 				</p:panelGrid>
@@ -61,6 +60,8 @@
 
 			<p:commandButton actionListener="#{libroBean.listar()}"
 				value="Listar" ajax="false" />
+				
+				<div class="Texto-Blanco">Estos son tus libros registrados</div>
 
 			<div class="margin">
 				<p:dataTable emptyMessage="No se han encontrado libros"
@@ -123,6 +124,7 @@
 
 	<h:form>
 		<p:stack
+		
 			icon="https://www.primefaces.org/showcase/resources/demo/images/dock/stack.png"
 			expanded="true">
 			<p:menuitem action="#{libroBean.cerrarS}" value="LogOut"

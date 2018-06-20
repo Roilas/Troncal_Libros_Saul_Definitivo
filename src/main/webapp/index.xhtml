@@ -55,7 +55,6 @@
 		</h:form>
 
 
-		<!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
 
 
 		<h:form id="formu2" rendered="#{libroBean.verificarSesion()}">
@@ -68,9 +67,7 @@
 					scrollHeight="350" scrollable="true" value="#{libroBean.lstLibros}"
 					var="emp">
 
-					<p:column style="width:16px">
-						<p:rowToggler />
-					</p:column>
+
 
 					<p:column filterBy="#{emp.codigolibro}" headerText="ISBN"
 						sortBy="#{emp.codigolibro}">
@@ -111,18 +108,7 @@
 						<p:commandLink action="#{libroBean.leer(emp)}" value="Modificar"
 							ajax="false" />
 					</p:column>
-					<p:rowExpansion>
-						<p:panelGrid columns="2" columnClasses="label,value"
-							style="width:100%">
-							<f:facet name="header">
-								<p:graphicImage width="250px" height="250px" url="#{emp.imagen}" />
-							</f:facet>
 
-							<h:outputText value="Descripción:" />
-							<h:outputText value="#{emp.descripcion}" />
-
-						</p:panelGrid>
-					</p:rowExpansion>
 				</p:dataTable>
 			</div>
 
